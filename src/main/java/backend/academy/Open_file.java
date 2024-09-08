@@ -5,6 +5,9 @@ import java.io.FileReader;
 
 
 public class Open_file{
+    private String word = null;
+
+
     private String read_file(String filename) {
         String word = null;
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
@@ -33,6 +36,9 @@ public class Open_file{
             System.out.println("Ошибка при чтении файла: " + e.getMessage());
             return null;
         }
+        return word;
+    }
+    public String get_word() {
         return word;
     }
 }
