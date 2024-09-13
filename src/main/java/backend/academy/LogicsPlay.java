@@ -22,5 +22,14 @@ public class LogicsPlay {
         this.letters = lettersSet(word);
     }
 
+    public final Set<Character> lettersSet(String word) {
+        Set<Character> newLetters = new HashSet<>(word.length());
+        for (char c : word.toCharArray()) {
+            char sh = Character.toLowerCase(c);
+            newLetters.add(sh);
+        }
+        return newLetters;
+    }
+
 
 }
