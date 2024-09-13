@@ -1,14 +1,14 @@
 package backend.academy;
 
-import lombok.Getter;
 import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Set;
+import lombok.Getter;
 
 public class LogicsPlay {
-    private Set<Character> letters; // Множество угаданных букв
-    private Set<Character> lettersGuess; // Множество букв, которые надо угадать
-    private Set<Character> allLetters; // Буквы, которые подал пользователь
+    private Set<Character> letters = null; // Множество угаданных букв
+    private Set<Character> lettersGuess = null; // Множество букв, которые надо угадать
+    private Set<Character> allLetters = null; // Буквы, которые подал пользователь
     @Getter private String word = null;
     @Getter private int nowCount = 0;
     private final int countError;
@@ -65,6 +65,22 @@ public class LogicsPlay {
             }
         }
         out.println();
+    }
+
+    public int getErrorNow() {
+        return countError - nowCount;
+    }
+
+    public int getNowLetter() {
+        return word.length() - lettersGuess.size();
+    }
+
+    public boolean gameWon() {
+        return lettersGuess.size() == letters.size();
+    }
+
+    public boolean gameLost() {
+        return nowCount == countError;
     }
 
 }

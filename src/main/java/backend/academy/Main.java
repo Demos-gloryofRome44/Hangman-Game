@@ -97,8 +97,7 @@ public class Main {
                 } else {
                     System.out.println("Ошибка! Нынешнее кол-во попыток : " + gameLogic.getErrorNow());
                     if (gameLogic.nowCount() > 0) {
-                        gameState.printState
-                            (gameLogic.nowCount() - 1, System.out);
+                        gameState.printState(gameLogic.nowCount() - 1, System.out);
                     }
 
                     /*if (CountError - gameLogic.getNowCount()  == 1) { //вывод подсказки

@@ -10,18 +10,18 @@ public class TypeException extends Exception {
         super("Утилитарный класс не может быть инстанцирован");
     }
 
-    public static Topic getTopics(Scanner scanner) throws Exception {
+    public static Topic getTopics(Scanner scanner, PrintStream out) throws Exception {
         while (true) {
-            System.out.print("Введите номер темы: "); // Запрашиваем ввод у пользователя
+            out.print("Введите номер темы: "); // Запрашиваем ввод у пользователя
             String input = scanner.nextLine().trim(); // Считываем строку и убираем пробелы по краям
 
             try {
                 int type = Integer.parseInt(input); // Пробуем преобразовать строку в целое число
                 return Topic.fromValue(type); // Возвращаем соответствующую тему
             } catch (NumberFormatException e) {
-                System.out.println(INVALIDMESSAGE);
+                out.println(INVALIDMESSAGE);
             } catch (IllegalArgumentException e) {
-                System.out.println(INVALIDMESSAGE);
+                out.println(INVALIDMESSAGE);
             }
         }
     }
