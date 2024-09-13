@@ -26,7 +26,7 @@ public class StateGallows {
         ROOF + LINE2 + HEAD + BODY + LENG + LINE + STAND
     };
 
-    public void print_state(int error, PrintStream out){
+    public void printState(int error, PrintStream out){
         out.print(GALLOW_STATE[error]);
     }
 }
