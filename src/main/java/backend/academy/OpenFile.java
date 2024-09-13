@@ -59,5 +59,48 @@ public class OpenFile {
         return chooseword;
     }
 
+    private String readfile(String filename, String section, int level) {
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(filename))) {
+            String fullsection = null;
+            String currentsection = null;
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                line = line.trim();
+
+                if (line.startsWith("[") && line.endsWith("]")) {
+                    fullsection = line.substring(1, line.length() - 1);
+                    String[] sectionMap = fullsection.split(":");
+                    if (sectionMap.length == 2 && Integer.parseInt(sectionMap[1]) == level) {
+                        currentsection = sectionMap[0];
+                        wordMap.put(currentsection, new ArrayList<>()); // Инициализация списка слов
+                        clueMap.put(currentsection, new ArrayList<>()); // Инициализация списка подсказок
+                    } else {
+                        currentsection = null;
+                    }
+                } else if (currentsection != null) {
+                    if (line.contains("=")) {
+                        String[] wordclue = line.split("=", 2);
+                        String newWord = wordclue[0].trim(); // слово
+                        String newClue = wordclue[1].trim(); // подсказка
+
+                        wordMap.get(currentsection).add(newWord);
+                        clueMap.get(currentsection).add(newClue); // Сохранение подсказки в clue_map
+
+                    }
+                }
+            }
+
+            selectRandomWord(section);
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File not found: " + e.getMessage(), e);
+        } catch (IOException e) {
+            throw new RuntimeException("IO error: " + e.getMessage(), e);
+        }
+
+        return this.word; // Возвращаем загаданное слово
+    }
+
 
 }
