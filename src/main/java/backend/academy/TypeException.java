@@ -12,7 +12,6 @@ public class TypeException extends Exception {
 
     public static Topic getTopics(Scanner scanner, PrintStream out) throws Exception {
         while (true) {
-            out.print("Введите номер темы: "); // Запрашиваем ввод у пользователя
             String input = scanner.nextLine().trim(); // Считываем строку и убираем пробелы по краям
 
             try {
