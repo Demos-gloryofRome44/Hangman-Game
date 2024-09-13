@@ -1,7 +1,6 @@
 package backend.academy;
 
 import java.io.PrintStream;
-import static java.lang.System.out;
 
 public class StateGallows {
     private static final String STAND = " ========\n";
@@ -27,5 +26,7 @@ public class StateGallows {
         ROOF + LINE2 + HEAD + BODY + LENG + LINE + STAND
     };
 
-
+    public void print_state(int error, PrintStream out){
+        out.print(GALLOW_STATE[error]);
+    }
 }
