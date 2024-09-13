@@ -14,23 +14,23 @@ class LogicsPlayTest {
         gameLogic = new LogicsPlay("кот", 6); // Пример: слово "кот", 6 попыток
     }
 
-    // Тест успешного угадывания буквы
+    // корректность отображения состояния игры после каждого ввода пользователя.
+    // введенные буквы корректно обрабатываются вне зависимости от их регистра.
     @Test
     void testGuessLetterCorrectly() {
         assertTrue(gameLogic.guessLetter('к'), "Буква 'к' должна быть угадана");
         assertEquals(2, gameLogic.getNowLetter(), "Кол-во букв которые надо угадать должно стать 2");
-        assertTrue(gameLogic.guessLetter('О'), "Буква 'к' должна быть угадана");
+        assertTrue(gameLogic.guessLetter('Т'), "Буква 'к' должна быть угадана");
         assertEquals(1, gameLogic.getNowLetter(), "Кол-во букв которые надо угадать должно стать 2");
     }
 
-    // Тест неправильного угадывания буквы
+    // Состояние игры корректно изменяется при угадывании/не угадывании.
     @Test
     void testGuessLetterIncorrectly() {
         assertFalse(gameLogic.guessLetter('а'), "Буква 'а' должна быть неверной");
-        assertEquals(1, gameLogic.getNowCount(), "Кол-во попыток должно увеличиться на 1");
+        assertEquals(1, gameLogic.nowCount(), "Кол-во попыток должно увеличиться на 1");
     }
 
-    // Тест обработки повторного ввода буквы
     @Test
     void testGuessLetterTwice() {
         assertTrue(gameLogic.guessLetter('к'), "Буква 'к' должна быть угадана");
@@ -42,7 +42,7 @@ class LogicsPlayTest {
     @Test
     void testGuessInvalidLetter() {
         assertFalse(gameLogic.guessLetter('1'), "Ввод цифры '1' должен быть неверным");
-        assertEquals(0, gameLogic.getNowCount(), "Кол-во попыток не должно увеличиться");
+        assertEquals(0, gameLogic.nowCount(), "Кол-во попыток не должно увеличиться");
     }
 
     // Тест победы в игре
@@ -54,7 +54,7 @@ class LogicsPlayTest {
         assertTrue(gameLogic.gameWon(), "Игра должна быть выиграна после угадывания всех букв");
     }
 
-    // Тест поражения в игре
+    // После превышения заданного количества попыток игра всегда возвращает поражение.
     @Test
     void testGameLost() {
         gameLogic.guessLetter('г');
@@ -64,6 +64,22 @@ class LogicsPlayTest {
         gameLogic.guessLetter('л');
         gameLogic.guessLetter('ь');
         assertTrue(gameLogic.gameLost(), "Игра должна быть проиграна после превышения попыток");
+    }
+
+    // Проверка, что при отгадывании ввод строки длиной больше чем 1 (опечатка) приводит к
+    //повторному вводу, без изменения состояния.
+    @Test
+    void testCorrectInput(){
+        int initialNowCount = gameLogic.nowCount();
+        int initialLettersRemaining = gameLogic.getNowLetter();
+        String tmp = "геральд"; // некоректный ввод буквы
+
+        // Попытка угадать с помощью строки длиной больше одного символа
+        assertFalse(gameLogic.isValidStr(tmp), "Ввод строки длиной больше чем 1 должен быть неверным");
+
+        // Проверка, что состояние не изменилось
+        assertEquals(initialNowCount, gameLogic.nowCount(), "Количество попыток должно остаться прежним");
+        assertEquals(initialLettersRemaining, gameLogic.getNowLetter(), "Количество оставшихся букв должно остаться прежним");
     }
 }
 
