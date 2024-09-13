@@ -13,7 +13,6 @@ public class TypeException extends Exception {
     public static Topic getTopics(Scanner scanner, PrintStream out) throws Exception {
         while (true) {
             String input = scanner.nextLine().trim(); // Считываем строку и убираем пробелы по краям
-
             try {
                 int type = Integer.parseInt(input); // Пробуем преобразовать строку в целое число
                 return Topic.fromValue(type); // Возвращаем соответствующую тему
