@@ -55,5 +55,16 @@ public class LogicsPlay {
         return Character.isLetter(letter) && !allLetters.contains(letter);
     }
 
+    public void currentState(PrintStream out) {
+        for (int i = 0; i < word.length(); ++i) {
+            char c = word.charAt(i);
+            if (lettersGuess.contains(c)) {
+                out.print(" " + Character.toUpperCase(c) + " ");
+            } else {
+                out.print(" __ ");
+            }
+        }
+        out.println();
+    }
 
 }
