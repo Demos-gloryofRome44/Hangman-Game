@@ -22,4 +22,13 @@ public enum Topic {
         return name;
     }
 
+    public static Topic fromValue(int value) {
+        for (Topic topic : Topic.values()) {
+            if (topic.getValue() == value) {
+                return topic;
+            }
+        }
+        throw new IllegalArgumentException("Нет темы с таким значением: " + value);
+    }
+
 }
