@@ -31,5 +31,29 @@ public class LogicsPlay {
         return newLetters;
     }
 
+    public boolean guessLetter(char letter) {
+        char lowerLetter = Character.toLowerCase(letter);
+        if (validLetter(letter)) {
+            if (letters.contains(lowerLetter)) {
+                lettersGuess.add(lowerLetter);
+                allLetters.add(lowerLetter);
+                return true; // Угадали букву
+            } else {
+                nowCount++;
+                allLetters.add(lowerLetter);
+                return false; // Не угадали букву
+            }
+        }
+        return false; // Неверный ввод
+    }
+
+    public boolean isValidStr(String input) {
+        return input.length() == 1 && Character.isLetter(input.charAt(0));
+    }
+
+    private boolean validLetter(char letter) {
+        return Character.isLetter(letter) && !allLetters.contains(letter);
+    }
+
 
 }
