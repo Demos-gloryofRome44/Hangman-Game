@@ -102,5 +102,19 @@ public class OpenFile {
         return this.word; // Возвращаем загаданное слово
     }
 
+    private void selectRandomWord(String section) {
+        List<String> words = wordMap.get(section);
+        List<String> clues = clueMap.get(section);
+
+        if (words != null && !words.isEmpty() && clues != null) {
+
+            int index = (int) (Math.random() * words.size());
+            //int index = SECURE_RANDOM.nextInt(words.size());
+            this.word = words.get(index);
+            this.clue = clues.get(index);
+        } else {
+            LOG.warning("Списки слов или подсказок пусты или имеют разный размер для секции: " + section);
+        }
+    }
 
 }
