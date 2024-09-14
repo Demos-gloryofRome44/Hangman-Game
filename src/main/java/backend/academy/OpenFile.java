@@ -18,10 +18,7 @@ public class OpenFile {
     @Getter private String clue = null;
     private Map<String, List<String>> wordMap = new HashMap<>(); //пара секция список секции
     private Map<String, List<String>> clueMap = new HashMap<>(); // пара секция подсказки к ней
-    private static final String FILE_PATH = "/Users/Egor/Desktop/Java/"
-        + "backend_academy_2024_project_1-java-Demos-gloryofRome44"
-        + "/src/main/java/backend/academy"
-        + "/dictionary.txt";
+    private static final String FILE_PATH = "src/main/resources/dictionary.txt";
     private static final Logger LOG = Logger.getLogger(OpenFile.class.getName());
 
     public OpenFile(int topic, int level) {
