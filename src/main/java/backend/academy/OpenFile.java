@@ -16,8 +16,8 @@ import lombok.Getter;
 public class OpenFile {
     @Getter private String word = null;
     @Getter private String clue = null;
-    private Map<String, List<String>> wordMap = new HashMap<>(); //пара секция список секции
-    private Map<String, List<String>> clueMap = new HashMap<>(); // пара секция подсказки к ней
+    private final Map<String, List<String>> wordMap = new HashMap<>(); //пара секция список секции
+    private final Map<String, List<String>> clueMap = new HashMap<>(); // пара секция подсказки к ней
     private static final String FILE_PATH = "src/main/resources/dictionary.txt";
     private static final Logger LOG = Logger.getLogger(OpenFile.class.getName());
 
@@ -35,15 +35,9 @@ public class OpenFile {
 
         Topic topic = Topic.fromValue(type);
         switch (topic) {
-            case ANIMAL:
+            case ANIMAL, TOWN, PERSON:
                 chooseword = readfile(filepath, topic.getName(), level);
-                break;
-            case TOWN:
-                chooseword = readfile(filepath, topic.getName(), level);
-                break;
-            case PERSON:
-                chooseword = readfile(filepath, topic.getName(), level);
-                break;
+               break;
             case MIX:
                 Topic[] topics = {Topic.ANIMAL, Topic.TOWN, Topic.PERSON};
                 Topic random = topics[(int) (Math.random() * topics.length)];
@@ -106,7 +100,6 @@ public class OpenFile {
         if (words != null && !words.isEmpty() && clues != null) {
 
             int index = (int) (Math.random() * words.size());
-            //int index = SECURE_RANDOM.nextInt(words.size());
             this.word = words.get(index);
             this.clue = clues.get(index);
         } else {
